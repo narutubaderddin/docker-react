@@ -1,0 +1,16 @@
+#super user permisstion to excecute build
+sudo: required
+# docker is a pre-required
+#travisci will automaticly install a copy of docker into our little container
+services:
+  - docker
+#before our test is run
+#build our docker image
+#-t create a tag
+before_install:
+  - docker build -t bader/docker-react -f Dockerfile.dev .
+
+#all command needed to run our 
+# -- -- coverage to exit from cammand line after the test complete
+script:
+  - docker run bader/docker-react npm run test -- --coverage
